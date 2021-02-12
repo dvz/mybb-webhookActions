@@ -16,6 +16,12 @@ class PostThread extends \webhookActions\Action
 
     public function execute(): bool
     {
+        // ignore WordPress notifications for updated posts
+        if (isset($this->data['post_date_gmt'], $this->data['post_modified_gmt'])) {
+            if ($this->data['post_date_gmt'] !== $this->data['post_modified_gmt']) {
+                return true;
+            }
+        }
 
         $subject = \webhookActions\getFormattedValue($this->options['subject'], $this->data);
 
