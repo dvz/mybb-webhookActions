@@ -37,8 +37,8 @@ class PostThread extends \webhookActions\Action
         $postDataHandler->action = 'thread';
         $postDataHandler->set_data([
             'fid' => (int)$this->options['forumId'],
-            'subject' => $subject,
-            'message' => $message,
+            'subject' => html_entity_decode($subject),
+            'message' => html_entity_decode($message),
             'options' => [
                 'disablesmilies' => true,
             ],
